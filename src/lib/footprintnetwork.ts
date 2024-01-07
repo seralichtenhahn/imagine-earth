@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { z } from 'zod'
 
 export async function getCountries() {
@@ -14,8 +16,40 @@ export async function getCountries() {
 
   const countries = validator.parse(response)
 
+  const countriesWithIsoa2 = countries.filter((country) => country.isoa2)
+
   // sort countries by name
-  return countries.sort((a, b) => a.countryName.localeCompare(b.countryName))
+  return countriesWithIsoa2.sort((a, b) =>
+    a.countryName.localeCompare(b.countryName)
+  )
+}
+
+export async function getCountryData(
+  countryCode: string,
+  year?: string | number
+) {
+  const response = await getApiData(
+    `/v1/data/${countryCode}/${year ?? new Date().getFullYear() - 2}`
+  )
+
+  const recordValidator = z.object({
+    value: z.number(),
+    year: z.number(),
+    score: z.string().optional(),
+    shortName: z.string(),
+    countryName: z.string(),
+    record: z.string(),
+  })
+
+  const validator = z.array(recordValidator)
+
+  const records = validator.parse(response)
+
+  const numberOfEarths = records.find((record) => record.record === 'Earths')
+
+  return {
+    numberOfEarths: recordValidator.parse(numberOfEarths),
+  }
 }
 
 async function getApiData(endpoint: string) {

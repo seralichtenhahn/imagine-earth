@@ -9,9 +9,13 @@ import {
 import React from 'react'
 import { pluralize } from '@/lib/utils'
 
+type YearSelectorProps = {
+  onChange: (value: string) => void
+}
+
 export function YearSelector() {
   return (
-    <Select>
+    <Select required name="year">
       <SelectTrigger className="w-auto">
         <SelectValue placeholder="x years" />
       </SelectTrigger>

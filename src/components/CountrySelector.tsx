@@ -6,14 +6,13 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import React from 'react'
 import { getCountries } from '@/lib/footprintnetwork'
 
 export async function CountrySelector() {
   const countries = await getCountries()
 
   return (
-    <Select>
+    <Select required name="countryCode">
       <SelectTrigger className="w-auto">
         <SelectValue placeholder="country" />
       </SelectTrigger>
