@@ -37,8 +37,6 @@ export const generateImageWithStableDiffusion = async ({
     }
   )
 
-  console.log(output)
-
   const outputSchema = z.tuple([z.string()])
 
   const [imageUrl] = outputSchema.parse(output)
