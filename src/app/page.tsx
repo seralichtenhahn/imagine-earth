@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="container max-w-screen-md">
       <div className="flex h-full min-h-screen flex-col items-center justify-center py-16">
-        <div className="pt-[30vh] text-center">
+        <div className="pt-[10vh] text-center md:pt-[30vh]">
           <CreatePredictionForm>
             <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
               Imagine earth

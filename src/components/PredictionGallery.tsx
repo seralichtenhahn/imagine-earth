@@ -22,14 +22,14 @@ export default async function PredictionGallery() {
             <li key={i}>
               {prediction ? (
                 <Image
-                  className="size-48 w-full rounded-md"
+                  className="aspect-square w-full rounded-md md:w-48"
                   src={prediction.imageUrl}
                   alt={prediction.name}
                   width={192}
                   height={192}
                 />
               ) : (
-                <Skeleton className="size-48 bg-gray-200" />
+                <Skeleton className="aspect-square w-full bg-gray-200 md:w-48" />
               )}
             </li>
           )
