@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
 import Link from 'next/link'
+import PageReloader from '@/components/PageReloader'
 import React from 'react'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -68,6 +69,7 @@ export default async function Prediction({
           {prediction.year} {pluralize(prediction.year, 'year')})
         </p>
       </div>
+      <PageReloader enabled={!prediction.imageUrl} />
     </main>
   )
 }
