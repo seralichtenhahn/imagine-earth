@@ -2,6 +2,7 @@ import { CountrySelector } from '@/components/CountrySelector'
 import CreatePredictionForm from './form'
 import PredictionGallery from '@/components/PredictionGallery'
 import React from 'react'
+import { Separator } from '@/components/ui/separator'
 import { YearSelector } from '@/components/YearSelector'
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
             </p>
           </CreatePredictionForm>
         </div>
-        <hr className="my-16 w-full border-b-gray-200" />
+        <Separator />
         <PredictionGallery />
       </div>
     </main>

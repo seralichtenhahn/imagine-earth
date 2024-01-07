@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import db from '@/lib/db'
@@ -21,13 +22,15 @@ export default async function PredictionGallery() {
           return (
             <li key={i}>
               {prediction ? (
-                <Image
-                  className="aspect-square w-full rounded-md md:w-48"
-                  src={prediction.imageUrl}
-                  alt={prediction.name}
-                  width={192}
-                  height={192}
-                />
+                <Link href={`/prediction/${prediction.id}`}>
+                  <Image
+                    className="aspect-square w-full rounded-md md:w-48"
+                    src={prediction.imageUrl}
+                    alt={prediction.name}
+                    width={192}
+                    height={192}
+                  />
+                </Link>
               ) : (
                 <Skeleton className="aspect-square w-full bg-gray-200 md:w-48" />
               )}
