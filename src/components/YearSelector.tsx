@@ -21,7 +21,7 @@ export function YearSelector() {
       </SelectTrigger>
       <SelectContent>
         {[...Array(100)].map((_, i) => (
-          <SelectItem key={i} value={`${i}`}>
+          <SelectItem key={i} value={`${i + 1}`}>
             {i + 1} {pluralize(i + 1, 'year')}
           </SelectItem>
         ))}
