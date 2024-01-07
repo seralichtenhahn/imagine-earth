@@ -19,14 +19,17 @@ export async function createPrediction(formData: FormData) {
     year: formData.get('year'),
   })
 
+  console.log('Fetching country data...')
   const { numberOfEarths } = await getCountryData(data.countryCode)
 
+  console.log('Generating prompt...')
   const { prompt, version } = generatePrompt({
     numberOfEarths: numberOfEarths.value,
     year: data.year,
     countryName: numberOfEarths.countryName,
   })
 
+  console.log('Generating image...')
   const prediction = await generateImageWithStableDiffusion({
     prompt,
   })
@@ -36,6 +39,7 @@ export async function createPrediction(formData: FormData) {
     'year'
   )}`
 
+  console.log('Storing prediction...')
   await db.prediction.create({
     data: {
       imageUrl: prediction,
