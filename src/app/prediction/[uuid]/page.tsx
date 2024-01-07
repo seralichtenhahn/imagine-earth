@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 import db from '@/lib/db'
 import { notFound } from 'next/navigation'
 import { pluralize } from '@/lib/utils'
@@ -37,13 +38,17 @@ export default async function Prediction({
             {prediction.version}
           </Badge>
         </div>
-        <Image
-          className="mt-8 aspect-square w-full rounded-md"
-          src={prediction.imageUrl}
-          alt={prediction.name}
-          width={768}
-          height={768}
-        />
+        {prediction.imageUrl ? (
+          <Image
+            className="mt-8 aspect-square w-full rounded-md"
+            src={prediction.imageUrl}
+            alt={prediction.name}
+            width={768}
+            height={768}
+          />
+        ) : (
+          <Skeleton className="aspect-square w-full bg-gray-200" />
+        )}
         <Separator />
         <h3 className="text-balance text-xl font-bold leading-tight tracking-tighter md:text-2xl lg:leading-[1.1]">
           Prompt

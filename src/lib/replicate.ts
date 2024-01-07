@@ -9,13 +9,17 @@ export const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 })
 
+interface GenerateImageWithStableDiffusionOptions {
+  prompt: string
+  negative_prompt?: string
+  callbackUrl?: string
+}
+
 export const generateImageWithStableDiffusion = async ({
   prompt,
   negative_prompt,
-}: {
-  prompt: string
-  negative_prompt?: string
-}) => {
+  callbackUrl,
+}: GenerateImageWithStableDiffusionOptions) => {
   const output = await replicate.run(
     'stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4',
     {
@@ -34,8 +38,16 @@ export const generateImageWithStableDiffusion = async ({
         prompt_strength: 0.8,
         num_inference_steps: 25,
       },
+      ...(callbackUrl && {
+        webhook: callbackUrl,
+        webhook_events_filter: ['completed'],
+      }),
     }
   )
+
+  if (callbackUrl) {
+    return
+  }
 
   const outputSchema = z.tuple([z.string()])
 

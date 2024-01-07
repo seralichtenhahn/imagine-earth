@@ -10,3 +10,15 @@ export function cn(...inputs: ClassValue[]) {
 export function pluralize(val: number, word: string, plural = word + 's') {
   return [1, -1].includes(val) ? word : plural
 }
+
+export function getBaseURL() {
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return process.env.NEXT_PUBLIC_VERCEL_URL
+  }
+
+  if (process.env.BASE_URL) {
+    return process.env.BASE_URL
+  }
+
+  throw new Error('BASE_URL environment variable is not set')
+}

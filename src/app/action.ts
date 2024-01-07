@@ -1,10 +1,12 @@
 'use server'
 
+import { getBaseURL, pluralize } from '@/lib/utils'
+
 import db from '@/lib/db'
 import { generateImageWithStableDiffusion } from '@/lib/replicate'
 import { generatePrompt } from '@/lib/prompts'
 import { getCountryData } from '@/lib/footprintnetwork'
-import { pluralize } from '@/lib/utils'
+import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
@@ -29,20 +31,15 @@ export async function createPrediction(formData: FormData) {
     countryName: numberOfEarths.countryName,
   })
 
-  console.log('Generating image...')
-  const prediction = await generateImageWithStableDiffusion({
-    prompt,
-  })
+  console.log('Storing prediction...')
 
   const name = `${numberOfEarths.countryName} in ${data.year} ${pluralize(
     data.year,
     'year'
   )}`
 
-  console.log('Storing prediction...')
-  await db.prediction.create({
+  const savedPrediction = await db.prediction.create({
     data: {
-      imageUrl: prediction,
       year: data.year,
       country: numberOfEarths.countryName,
       countryCode: data.countryCode,
@@ -52,7 +49,17 @@ export async function createPrediction(formData: FormData) {
     },
   })
 
-  revalidatePath('/')
+  console.log('Generating image...')
 
-  return { message: 'Prediction created' }
+  const callbackUrl = `${getBaseURL()}/api/store-image?predictionId=${
+    savedPrediction.id
+  }`
+
+  await generateImageWithStableDiffusion({
+    prompt,
+    callbackUrl,
+  })
+
+  revalidatePath('/')
+  return redirect('/prediction/' + savedPrediction.id)
 }

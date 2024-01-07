@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { Image } from '@/components/ui/image'
 import Link from 'next/link'
 import React from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -21,7 +21,7 @@ export default async function PredictionGallery() {
 
           return (
             <li key={i}>
-              {prediction ? (
+              {prediction && prediction.imageUrl ? (
                 <Link href={`/prediction/${prediction.id}`}>
                   <Image
                     className="aspect-square w-full rounded-md md:w-48"

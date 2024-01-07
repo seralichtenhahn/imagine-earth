@@ -12,7 +12,7 @@ model Prediction {
   id          String   @default(uuid())
   name        String
   prompt      String
-  imageUrl    String
+  imageUrl    String?
   version     String
   country     String
   countryCode String
