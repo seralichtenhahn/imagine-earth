@@ -12,12 +12,12 @@ export function pluralize(val: number, word: string, plural = word + 's') {
 }
 
 export function getBaseURL() {
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL
-  }
-
   if (process.env.BASE_URL) {
     return process.env.BASE_URL
+  }
+
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL
   }
 
   throw new Error('BASE_URL environment variable is not set')
