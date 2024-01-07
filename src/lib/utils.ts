@@ -13,7 +13,7 @@ export function pluralize(val: number, word: string, plural = word + 's') {
 
 export function getBaseURL() {
   if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return process.env.NEXT_PUBLIC_VERCEL_URL
+    return 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL
   }
 
   if (process.env.BASE_URL) {
