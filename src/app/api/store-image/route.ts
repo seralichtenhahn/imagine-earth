@@ -32,6 +32,8 @@ export const POST = async (request: Request) => {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('predictionId')
 
+  console.log('Received webhook for prediction', id)
+
   if (!id || typeof id !== 'string') {
     return new Response(JSON.stringify({ success: false }), {
       headers: { 'content-type': 'application/json' },
@@ -43,8 +45,10 @@ export const POST = async (request: Request) => {
 
   const { output } = validator.parse(data)
 
+  console.log("Fetching image from Replicate's API...", output[0])
   const image = await fetch(output[0]).then((res) => res.arrayBuffer())
 
+  console.log('Storing image in S3...')
   await s3.send(
     new PutObjectCommand({
       Bucket: process.env.AWS_BUCKET,
@@ -55,6 +59,7 @@ export const POST = async (request: Request) => {
     })
   )
 
+  console.log('Updating prediction...')
   const prediction = await db.prediction.update({
     where: { id },
     data: {
