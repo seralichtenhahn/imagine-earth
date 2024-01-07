@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { Inter as FontSans } from 'next/font/google'
+import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
 import { cn } from '@/lib/utils'
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         )}
       >
         {children}
+        <Footer />
       </body>
     </html>
   )
