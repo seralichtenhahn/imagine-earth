@@ -12,14 +12,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   ({ className, ...props }, ref) => {
-    return (
-      <NextImage
-        className={className}
-        ref={ref}
-        {...props}
-        loader={({ src }) => src}
-      />
-    )
+    return <NextImage className={className} ref={ref} {...props} />
   }
 )
 

@@ -55,11 +55,10 @@ export async function createPrediction(formData: FormData) {
     savedPrediction.id
   }`
 
-  await generateImageWithStableDiffusion({
+  generateImageWithStableDiffusion({
     prompt,
     callbackUrl,
   })
 
-  revalidatePath('/')
   return redirect('/prediction/' + savedPrediction.id)
 }

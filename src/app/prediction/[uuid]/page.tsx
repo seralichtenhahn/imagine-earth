@@ -47,7 +47,7 @@ export default async function Prediction({
             height={768}
           />
         ) : (
-          <Skeleton className="aspect-square w-full bg-gray-200" />
+          <Skeleton className="mt-8 aspect-square w-full bg-gray-200" />
         )}
         <Separator />
         <h3 className="text-balance text-xl font-bold leading-tight tracking-tighter md:text-2xl lg:leading-[1.1]">
