@@ -1,5 +1,6 @@
 import { PromptGeneratorV1 } from './PromptGeneratorV1'
 import { PromptGeneratorV2 } from './PromptGeneratorV2'
+import { PromptGeneratorV3 } from './PromptGeneratorV3'
 
 export type PromptInputs = {
   year: string | number
@@ -7,7 +8,7 @@ export type PromptInputs = {
   numberOfEarths: number
 }
 
-const PROMPT_VERSIONS = ['v1', 'v2'] as const
+const PROMPT_VERSIONS = ['v1', 'v2', 'v3'] as const
 
 type PromptVersion = (typeof PROMPT_VERSIONS)[number]
 
@@ -22,6 +23,9 @@ export function generatePrompt(inputs: PromptInputs, version?: PromptVersion) {
       break
     case 'v2':
       generator = new PromptGeneratorV2()
+      break
+    case 'v3':
+      generator = new PromptGeneratorV3()
       break
     default:
       throw new Error(`Unknown prompt version: ${version}`)
