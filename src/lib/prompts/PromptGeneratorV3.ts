@@ -31,7 +31,7 @@ export class PromptGeneratorV3 implements BasePromptGenerator {
   }
 
   getPrompt() {
-    return this.prompt
+    return this.prompt.replace(/(\s*,?\s*)*$/, '') // remove trailing comma
   }
 
   setSeverity(years: number) {
