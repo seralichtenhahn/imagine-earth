@@ -58,7 +58,7 @@ export class PromptGeneratorV3 implements BasePromptGenerator {
         case rounded === 3:
           return 'a dystopian wasteland with broken futuristic buildings'
         case rounded === 4:
-          return `signs of a past civilization with ruins of buildings, and a few plants, ${this.getNaturalDisaster()}`
+          return `signs of a past civilization with ruins of buildings and a few plants, small ${this.getNaturalDisaster()} in the distance`
         case rounded >= 5:
           return `a barren wasteland with no signs of life, big ${this.getNaturalDisaster()}`
       }
