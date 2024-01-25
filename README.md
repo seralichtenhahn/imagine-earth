@@ -22,10 +22,10 @@ Before starting, ensure you have:
 
 To install and set up the project:
 
-1. Clone the repository:
+1. Clone the repository: 
 
    ```bash
-   git clone https://github.com/seralichtenhahn/imagine-earth.git
+   git clone https://git.arts.ac.uk/serafin/imagine-earth.git
    ```
 
 2. Change directory to the project folder:
